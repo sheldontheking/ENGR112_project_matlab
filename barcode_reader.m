@@ -3,33 +3,49 @@ clear
 close all
 
 %% initialization of brick, sensor, and motor
-myev3 = legoev3('USB');
+myev3 = legoev3('USB')
 mycolorsensor = colorSensor(myev3);
 mymotor = motor(myev3,'B');
 resetRotation(mymotor);
-mymotor.Speed = 50;
 
 %% initialization of vars
-barcode = [];
+
 rotation = readRotation(mymotor);
+barcode = [];
+count = 1;
+mymotor.Speed = -30;
 
 %% program
-while(readColor(mycolorsensor) ~= "red")
-    start(mymotor)
-    pause(0.02)
-    stop(mymotor)
-    
-    if(readColor(mycolorsensor) == "white") 
-        barcode = [barcode, 0];
-    else
-        barcode = [barcode, 1];
-    end
-    
-    start(mymotor)
-    pause(0.02)
-    stop(mymotor)
+start(mymotor)
+while (readColor(mycolorsensor) == "white")
+    pause(0.0001)
 end
+stop(mymotor,1)
 
+pauseMotor(1,mymotor)
 
-barcode
+while count <= 11
+    barcode = [barcode,readCurrentBlock(mymotor, mycolorsensor)];
+    pauseMotor(1,mymotor)
+    mymotor.Speed = -30;
+    count = count + 1;
+end
+%% translate barcode into meaningful information and out put it into a file
 
+[x,y] = detectMeterial(barcode([3 4 5]));
+[m,n] = numberOfPallets(barcode([7 8 9 10 11]));
+
+meterial = [x,y];
+numOfPallet = [m,n];
+
+sum = [meterial; numOfPallet];
+
+file = fopen('key.txt','w');
+fprintf(file, "%s,%s\n", meterial);
+fprintf(file, "%d,%d\n", numOfPallet);
+fclose(file);
+
+% mymotor.Speed = -100;
+% start(mymotor)
+% pause(0.5)
+% stop(mymotor)
