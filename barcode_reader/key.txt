@@ -1,0 +1,2 @@
+large blue glass,small blue glass
+0,0
