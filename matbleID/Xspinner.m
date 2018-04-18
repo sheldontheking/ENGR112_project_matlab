@@ -1,5 +1,5 @@
 function [] = Xspinner(legoObject)
-spinner = motor(legoObject,'D');
+spinner = motor(legoObject,'A');
 spinner.Speed = -20; 
 
 resetRotation(spinner);
