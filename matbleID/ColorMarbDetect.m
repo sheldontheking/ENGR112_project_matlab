@@ -1,4 +1,4 @@
-function [output] = ColorMarbDetect(legoObject)
+function [output] = ColorMarbDetect(colorSort)
 
 currentColor = -1;
 breakout = false;
@@ -14,26 +14,14 @@ breakout = false;
 %  9 -> L White 
 while breakout == false
 
-while currentColor == -1
-   currentColor = colorFinder(legoObject);
-
-end
-pause(.2)
-currentColor = colorFinder(legoObject);
-
-if currentColor ~= -1
-    breakout = true;
-    
-else 
-    breakout = false; 
-    
-end
+    while currentColor == -1
+       currentColor = colorFinder(colorSort);
+       pause(0.3);
+    end
+    currentColor = colorFinder(colorSort);
+    break;
 end
 
 output = currentColor;
-   
-   
-
-
 %end of function
 end

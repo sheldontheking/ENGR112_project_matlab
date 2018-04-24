@@ -1,13 +1,14 @@
-clear
-mylego = legoev3('usb')
-m1 = legoev3('bt', '001653453b5f')
-m = motor(mylego,'A');
-resetRotation(m)
+
+dispen.Speed = 20;
+start(dispen);
+pause(4)
+resetRotation(spider)
 while true
-    color = ColorMarbDetect(m1);
-    RotateTo(m,color) 
-    Xspinner(mylego)
+    
+    color = ColorMarbDetect(colorSort);
+    RotateTo(spider,color) 
+    Xspinner(spin)
     pause(2)
-    RotateTo(m,0) 
+    RotateTo(spider,6) 
     
 end 

@@ -30,8 +30,8 @@ switch numPallet
         type1numPallet = 3;
         type2numPallet = 1;
     case 9
-        type1numPallet = 0;
-        type2numPallet = 2;
+        type1numPallet = 2;
+        type2numPallet = 0;
     case 10
         type1numPallet = 1;
         type2numPallet = 2;

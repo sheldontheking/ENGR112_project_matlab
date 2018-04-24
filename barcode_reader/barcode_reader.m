@@ -1,90 +1,85 @@
-clc
-clear
-close all
 
 %% initialization of brick, sensor, and motor
-myev3 = legoev3('USB')
-mycolorsensor = colorSensor(myev3);
-mymotor = motor(myev3,'D');
-resetRotation(mymotor);
-
+barcodemotor = motor(myusb,'D')
+barcodecolor = colorSensor(myusb,4)
 %% initialization of vars
 
-rotation = readRotation(mymotor);
+rotation = readRotation(barcodemotor);
 barcode1 = [];
 barcode2 = [];
 barcode3 = [];
 barcode4 = [];
 total = [];
 count = 1;
-mymotor.Speed = -30;
+barcodemotor.Speed = -30;
 
 %% program
-  start(mymotor)
-while (readColor(mycolorsensor) == "white")
+  start(barcodemotor)
+while (readColor(barcodecolor) == 'white')
     pause(0.0001)
 end
-stop(mymotor,1)
+stop(barcodemotor,1)
 
-pauseMotor(1,mymotor)
+pauseMotor(1,barcodemotor)
 
 while count <= 17
-    barcode1 = [barcode1,readCurrentBlock(mymotor, mycolorsensor)];
-    pauseMotor(1,mymotor)
-    mymotor.Speed = -30;
+    barcode1 = [barcode1,readCurrentBlock(barcodemotor, barcodecolor)];
+    pauseMotor(1,barcodemotor)
+    barcodemotor.Speed = -30;
     count = count + 1;
 end
-
+barcode1
 %% 
 count = 1;
-start(mymotor)
-while (readColor(mycolorsensor) == "white")
+start(barcodemotor)
+while (readColor(barcodecolor) == "white")
     pause(0.0001)
 end
-stop(mymotor,1)
+stop(barcodemotor,1)
 
-pauseMotor(1,mymotor)
+pauseMotor(1,barcodemotor)
 
 while count <= 17
-    barcode2 = [barcode2,readCurrentBlock(mymotor, mycolorsensor)];
-    pauseMotor(1,mymotor)
-    mymotor.Speed = -30;
+    barcode2 = [barcode2,readCurrentBlock(barcodemotor, barcodecolor)];
+    pauseMotor(1,barcodemotor)
+    barcodemotor.Speed = -30;
     count = count + 1;
 end
-
+barcode2
 %%
 count = 1;
-start(mymotor)
-while (readColor(mycolorsensor) == "white")
+start(barcodemotor)
+while (readColor(barcodecolor) == "white")
     pause(0.0001)
 end
-stop(mymotor,1)
+stop(barcodemotor,1)
 
-pauseMotor(1,mymotor)
+pauseMotor(1,barcodemotor)
 
 while count <= 17
-    barcode3 = [barcode3,readCurrentBlock(mymotor, mycolorsensor)];
-    pauseMotor(1,mymotor)
-    mymotor.Speed = -30;
+    barcode3 = [barcode3,readCurrentBlock(barcodemotor, barcodecolor)];
+    pauseMotor(1,barcodemotor)
+    barcodemotor.Speed = -30;
     count = count + 1;
 end
-
+barcode3
 %%
 count = 1;
-start(mymotor)
-while (readColor(mycolorsensor) == "white")
+start(barcodemotor)
+while (readColor(barcodecolor) == "white")
     pause(0.0001)
 end
-stop(mymotor,1)
+stop(barcodemotor,1)
 
-pauseMotor(1,mymotor)
+pauseMotor(1,barcodemotor)
 
 while count <= 17
-    barcode4 = [barcode4,readCurrentBlock(mymotor, mycolorsensor)];
-    pauseMotor(1,mymotor)
-    mymotor.Speed = -30;
+    barcode4 = [barcode4,readCurrentBlock(barcodemotor, barcodecolor)];
+    pauseMotor(1,barcodemotor)
+    barcodemotor.Speed = -30;
     count = count + 1;
 end
+barcode4
 %% translate barcode into meaningful information and out put it into a file
 
 

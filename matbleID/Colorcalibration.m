@@ -1,11 +1,13 @@
-clear 
-mylego = legoev3('usb');
-color_sens = colorSensor(mylego, 1);
+% clear 
+% mylego = legoev3('usb');
+% color_sens = colorSensor(mylego, 1);
 
 while true 
     
-   a =readColorRGB(color_sens)
+   clc 
    
-   pause(.5)
+   a =readColorRGB(colorSort)
+   
+   pause(1)
     
 end
